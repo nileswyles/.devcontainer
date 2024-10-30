@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/base:jammy
+FROM --platform=linux/amd64 mcr.microsoft.com/devcontainers/base:jammy
 
 COPY --chmod=700 install_dependencies.pl install_dependencies.pl
 COPY --chmod=700 lame.pl lame.pl
