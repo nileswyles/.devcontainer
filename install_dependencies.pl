@@ -32,3 +32,11 @@ system("apt install -y postgresql-common");
 system("apt install -y graphviz");
 system("apt install -y libgraphviz-dev");
 system("/usr/share/postgresql-common/pgdg/apt.postgresql.org.sh");
+
+# required for google-cloud-cpp
+system("apt install -y cmake");
+system("apt install -y curl");
+system("apt install -y zip");
+system("apt install -y unzip");
+system("apt install -y tar");
+system("apt install -y pkg-config");
