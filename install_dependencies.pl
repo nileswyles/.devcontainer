@@ -21,6 +21,7 @@
 system("apt update");
 
 system("apt install -y g++");
+system("apt install -y vim");
 system("apt install -y clang");
 system("apt install -y gdb");
 system("apt install -y git");
