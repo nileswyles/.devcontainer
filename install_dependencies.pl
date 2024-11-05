@@ -25,6 +25,7 @@ system("apt install -y vim");
 system("apt install -y clang");
 system("apt install -y gdb");
 system("apt install -y git");
+system("apt install -y screen");
 
 system("apt install -y libssl-dev");
 system("apt install -y libcrypto-dev");
