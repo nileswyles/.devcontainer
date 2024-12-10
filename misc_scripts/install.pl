@@ -28,3 +28,11 @@ system($cmd_set_failed_filter_alias);
 my $cmd_set_testscan_alias = "echo \"alias testscan='$path_to_scripts_directory/tester_function_scanner.pl'\" >> \$HOME/.bashrc";
 print("\nExecuting: \n$cmd_set_testscan_alias\n");
 system($cmd_set_testscan_alias);
+
+$cmd_set_failed_filter_alias = "echo \"alias failed='$path_to_scripts_directory/tester_filter_failed.pl'\" >> \$HOME/.zshrc";
+print("Executing: \n$cmd_set_failed_filter_alias\n");
+system($cmd_set_failed_filter_alias);
+
+$cmd_set_testscan_alias = "echo \"alias testscan='$path_to_scripts_directory/tester_function_scanner.pl'\" >> \$HOME/.zshrc";
+print("\nExecuting: \n$cmd_set_testscan_alias\n");
+system($cmd_set_testscan_alias);
