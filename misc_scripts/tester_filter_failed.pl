@@ -1,24 +1,34 @@
 #!/bin/perl
 
-my $test = "";
+my $buffer = "";
+my $test_suite_string = "";
+my $failed_tests = 0;
+my @TEST_STRINGS;
 while (<STDIN>) {
     if ($_ =~ /Test Func: (.*) -> (.*)/) {
         # new test
-        $test = "\n#######################################\n\n";
-        $test .= "$_";
+        $buffer = "\n#######################################\n\n";
+        $buffer .= "$_";
     } elsif ($_ =~ /Test Failed!/) {
-        $test .= "$_";
-        print($test);
-    } elsif ($_ =~ /Failed Tests:/) {
+        $buffer .= "$_";
+        $TEST_STRINGS[$failed_tests++] = $buffer;
+    } elsif ($_ =~ /(-+) (.+) (-+)/) {
+        # new test suite
+        $test_suite_string = "\n$_";
+    } elsif ($failed_tests != 0 && $_ =~ /Failed Tests:/) {
         # new results
-        $test = "\n#######################################\n\n";
-        $test .= "$_";
-    } elsif ($_ =~ /Results:/) {
-        # test results
-        $test .= "$_";
-        print($test);
-        print("\n---------------------------------------\n");
+        $buffer = "\n#######################################\n\n";
+        $buffer .= "$_";
+    } elsif ($failed_tests != 0 && $_ =~ /Results:/) {
+        # print test suite
+        print($test_suite_string);
+        for (my $i = 0; $i < scalar(@TEST_STRINGS); $i++) {
+            print($TEST_STRINGS[$i]);
+        }
+        $buffer .= "$_\n";
+        print($buffer);
+        $failed_tests = 0; # used to ignore test suites with no test suites with no failed tests.
     } else {
-        $test .= "$_";
+        $buffer .= "$_";
     }
 }
