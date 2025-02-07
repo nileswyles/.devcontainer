@@ -3,7 +3,7 @@
 	"build": {
 		"dockerfile": "./Dockerfile"
 	},
-	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind", 
+	"workspaceMount": "type=bind,source=${localWorkspaceFolder},target=/workspace", 
 	"workspaceFolder": "/workspace",
 	"forwardPorts": [
 		8080

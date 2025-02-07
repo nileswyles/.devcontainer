@@ -33,7 +33,7 @@ system("apt install -y libcrypto-dev");
 system("apt install -y postgresql-common");
 system("apt install -y graphviz");
 system("apt install -y libgraphviz-dev");
-system("/usr/share/postgresql-common/pgdg/apt.postgresql.org.sh");
+system("/usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y");
 
 # required for google-cloud-cpp
 system("apt install -y cmake");
@@ -46,7 +46,7 @@ system("apt install -y pkg-config");
 # gcloud CLI
 system("curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg");
 system("echo \"deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main\" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list");
-system("apt-get update && sudo apt-get install google-cloud-cli");
+system("apt-get update && sudo apt-get install -y google-cloud-cli");
 
 # install dev container scripts.
 my $path_to_scripts_directory = `pwd`;
