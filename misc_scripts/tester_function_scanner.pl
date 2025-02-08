@@ -9,17 +9,17 @@ for (my $i = 0; $i < scalar(@ARGV); $i++) {
 	}
 }
 if ($PATH_TO_FILE eq "") {
-    print("This file is required.");
+    print("This file is required.\n");
     exit(1);
 }
 open(my $fh, "<", $PATH_TO_FILE);
 print("Test function calls: \n");
 while (<$fh>) {
+    # TODO:
+    #   don't include if inline commented. (negative lookbehind isn't working and I don't care to figure that out)
     if ($_ =~ /\/\/.*void (.*)\(TestArg \* .*\).*\{/) {
     } else {
-        # TODO:
-        #   don't include if inline commented. (negative lookbehind isn't working and I don't care to figure that out)
-        if ($_ =~ /(?<!\/\/).*void (.*)\(TestArg \* .*\).*\{/) {
+        if ($_ =~ /.*void (.*)\(TestArg \* .*\).*\{/) {
             print("t.addTest($1);\n");
         }
     }
@@ -28,9 +28,11 @@ print("\n\n");
 print("Test function declarations: \n");
 open(my $fh, "<", $PATH_TO_FILE);
 while (<$fh>) {
+    # TODO:
+    #   don't include if inline commented. (negative lookbehind isn't working and I don't care to figure that out)
     if ($_ =~ /\/\/.*void (.*)\(TestArg \* .*\).*\{/) {
     } else {
-        if ($_ =~ /(?<!\/\/).*void (.*)\(TestArg \* .*\).*\{/) {
+        if ($_ =~ /.*void (.*)\(TestArg \* .*\).*\{/) {
             print("static void $1(TestArg * t);\n");
         }
     }

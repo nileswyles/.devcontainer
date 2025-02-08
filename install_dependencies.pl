@@ -1,24 +1,13 @@
 #!/usr/bin/perl
 
-# because wtf even is awk/cut...
-
-# lmao, just roll with it, I guess?
-# my $VERSION = `lsb_release -c`;
-# if ($VERSION =~ /.+:\s+(.+)/) {
-#     if ($1 ne "jammy") {
-#         print("Invalid version of ubuntu: " . $1);
-#         exit;
-#     }
-# }
-
-# assumes ubuntu jammy
-
-# important dependencies
+# assumes ubuntu jammy version-crucial dependencies
 # https://packages.ubuntu.com/jammy/libssl-dev - current version of openssl is 3.0.2
 #   should be fine if major stays at 3.
 
-# 
 system("apt update");
+
+system("rm /bin/sh");
+system("ln -s /bin/bash /bin/sh");
 
 system("apt install -y g++");
 system("apt install -y vim");
