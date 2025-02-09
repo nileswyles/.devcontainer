@@ -1,29 +1,12 @@
-#!/usr/bin/perl
+#!/usr/bin/perl -I/scripts/perl_modules
+# convention is to install to the root folder.
 
+use File;
 # assumes ubuntu jammy version-crucial dependencies
 # https://packages.ubuntu.com/jammy/libssl-dev - current version of openssl is 3.0.2
 #   should be fine if major stays at 3.
 
-# TODO: move to File module
-my $abs_path_to_containing_folder = `pwd`;
-my $last_char = substr($abs_path_to_containing_folder, -1);
-if ($last_char eq "\n") {
-    $abs_path_to_containing_folder = substr($abs_path_to_containing_folder, 0, length($abs_path_to_containing_folder) - 1);
-}
-if ($last_char eq "/") {
-    $abs_path_to_containing_folder = substr($abs_path_to_containing_folder, 0, length($abs_path_to_containing_folder) - 1);
-}
-if ($0 =~ /(\.)?(.*)?\/install_dependencies.pl/) {
-    # remember $0 is first token of CLI string, so may be relative to pwd or absolute...
-    # system launches a shell which can open anywhere... lmao so yeah convert to absolute.
-    if ($1 eq ".") {
-        # if relative path
-        $abs_path_to_containing_folder .= $2;
-    } else {
-        # if absolute path
-        $abs_path_to_containing_folder = $2;
-    }
-}
+my $abs_path_to_containing_folder = File::pathToContainingFolder();
 
 system("apt update");
 
