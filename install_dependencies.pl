@@ -10,8 +10,7 @@ my $abs_path_to_containing_folder = File::pathToContainingFolder();
 
 system("apt update");
 
-system("rm /bin/sh");
-system("ln -s /bin/bash /bin/sh");
+system("ln -sf /bin/bash /bin/sh");
 
 system("apt install -y g++");
 system("apt install -y vim");
@@ -42,5 +41,5 @@ system("echo \"deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://pack
 system("apt-get update && sudo apt-get install -y google-cloud-cli");
 
 # convention is to install to root directory
-system("ln -s $abs_path_to_containing_folder/linux_goodness/scripts /scripts");
+system("ln -sf $abs_path_to_containing_folder/linux_goodness/scripts /scripts");
 system("/scripts/cpp-reflection/install.pl");
