@@ -4,6 +4,27 @@
 # https://packages.ubuntu.com/jammy/libssl-dev - current version of openssl is 3.0.2
 #   should be fine if major stays at 3.
 
+# TODO: move to File module
+my $abs_path_to_containing_folder = `pwd`;
+my $last_char = substr($abs_path_to_containing_folder, -1);
+if ($last_char eq "\n") {
+    $abs_path_to_containing_folder = substr($abs_path_to_containing_folder, 0, length($abs_path_to_containing_folder) - 1);
+}
+if ($last_char eq "/") {
+    $abs_path_to_containing_folder = substr($abs_path_to_containing_folder, 0, length($abs_path_to_containing_folder) - 1);
+}
+if ($0 =~ /(\.)?(.*)?\/install_dependencies.pl/) {
+    # remember $0 is first token of CLI string, so may be relative to pwd or absolute...
+    # system launches a shell which can open anywhere... lmao so yeah convert to absolute.
+    if ($1 eq ".") {
+        # if relative path
+        $abs_path_to_containing_folder .= $2;
+    } else {
+        # if absolute path
+        $abs_path_to_containing_folder = $2;
+    }
+}
+
 system("apt update");
 
 system("rm /bin/sh");
@@ -37,23 +58,6 @@ system("curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearm
 system("echo \"deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main\" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list");
 system("apt-get update && sudo apt-get install -y google-cloud-cli");
 
-# install dev container scripts.
-my $path_to_scripts_directory = `pwd`;
-my $last_char = substr($path_to_scripts_directory, -1);
-if ($last_char eq "\n") {
-    $path_to_scripts_directory = substr($path_to_scripts_directory, 0, length($path_to_scripts_directory) - 1);
-}
-if ($last_char eq "/") {
-    $path_to_scripts_directory = substr($path_to_scripts_directory, 0, length($path_to_scripts_directory) - 1);
-}
-if ($0 =~ /(\.)?(.*)?\/install_dependencies.pl/) {
-    if ($1 eq ".") {
-        # if relative path
-        $path_to_scripts_directory .= $2;
-    } else {
-        # if absolute path
-        $path_to_scripts_directory = $2;
-    }
-}
-$path_to_scripts_directory .= "/misc_scripts";
-system("$path_to_scripts_directory/install.pl");
+# convention is to install to root directory
+system("ln -s /scripts $abs_path_to_containing_folder/linux_goodness/scripts");
+system("/scripts/cpp-reflection/install.pl");

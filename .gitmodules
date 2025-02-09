@@ -1,0 +1,3 @@
+[submodule "linux_goodness"]
+	path = linux_goodness
+	url = https://github.com/nileswyles/linux_goodness.git
