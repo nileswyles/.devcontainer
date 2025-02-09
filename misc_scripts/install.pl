@@ -41,7 +41,8 @@ my %script_map = (
     "testdeclmap" => "$path_to_scripts_directory/tester_declaration_mapper.pl"
 );
 
-# search for alias entry in file.. if not, then append...
+# search for alias entry in file. if not, append.
+# Make sure they're updated everytime the shell is invoked. (because outliers?)
 open(my $fh, '+<', $SHELL_RC) or die "Can't open +< $SHELL_RC: $!";
 
 my @updated_aliases;
@@ -63,7 +64,7 @@ while (<$fh>) {
     if ($found eq 0) { 
         my $allow = 1;
         foreach (@updated_aliases) {
-            # ignore duplicate entries for script.
+            # Only allow a single entry for script.
             if ($line =~ /^alias $_/) {
                 $allow = 0;
                 break;
