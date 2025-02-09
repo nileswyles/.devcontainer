@@ -42,7 +42,7 @@ my %script_map = (
 );
 
 # search for alias entry in file. if not, append.
-# Make sure they're updated everytime the shell is invoked. (because outliers?)
+# Make sure they're updated everytime the shell is invoked. (caution against outliers?)
 open(my $fh, '+<', $SHELL_RC) or die "Can't open +< $SHELL_RC: $!";
 
 my @updated_aliases;
