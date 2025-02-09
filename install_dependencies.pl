@@ -1,12 +1,8 @@
-#!/usr/bin/perl -I/scripts/perl_modules
-# convention is to install linux_goodness/scripts to the root folder.
+#!/usr/bin/perl
 
-use File;
 # assumes ubuntu jammy version-crucial dependencies
 # https://packages.ubuntu.com/jammy/libssl-dev - current version of openssl is 3.0.2
 #   should be fine if major stays at 3.
-
-my $abs_path_to_containing_folder = File::pathToContainingFolder();
 
 system("apt update");
 
