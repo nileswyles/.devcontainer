@@ -37,3 +37,6 @@ system("echo \"deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://pack
 system("apt-get update && sudo apt-get install -y google-cloud-cli");
 
 system("/scripts/cpp-reflection/install.pl");
+
+system("apt install -y libpulse-dev");
+system("apt install -y libbluetooth-dev");
