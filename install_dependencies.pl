@@ -4,6 +4,8 @@
 # https://packages.ubuntu.com/jammy/libssl-dev - current version of openssl is 3.0.2
 #   should be fine if major stays at 3.
 
+my $SCRIPTS_DIR = $ENV{"SCRIPTS_DIR"};
+
 system("apt update");
 
 system("ln -sf /bin/bash /bin/sh");
@@ -36,7 +38,7 @@ system("curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearm
 system("echo \"deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main\" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list");
 system("apt-get update && sudo apt-get install -y google-cloud-cli");
 
-system("/scripts/cpp-reflection/install.pl");
+system("/usr/bin/perl -I $SCRIPTS_DIR/perl_modules $SCRIPTS_DIR/cpp-reflection/install.pl");
 
 system("apt install -y libpulse-dev");
 system("apt install -y libbluetooth-dev");

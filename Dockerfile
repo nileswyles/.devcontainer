@@ -1,5 +1,7 @@
 FROM --platform=linux/amd64 mcr.microsoft.com/devcontainers/base:jammy
 
+ENV SCRIPTS_DIR="/scripts"
+
 # TODO: until mounting works.
 COPY --chmod=700 linux_goodness/scripts /scripts
 COPY --chmod=700 install_dependencies.pl /install_dependencies.pl
